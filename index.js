@@ -1,10 +1,9 @@
-import nodeifyFetch, { Headers } from 'nodeify-fetch'
 import patchRequest from './lib/patchRequest.js'
 import patchResponse from './lib/patchResponse.js'
 
 async function rdfFetch (url, options = {}) {
   const factory = options.factory
-  const fetch = options.fetch || nodeifyFetch
+  const _fetch = options.fetch || fetch
   const formats = options.formats
 
   if (!formats) {
@@ -13,12 +12,11 @@ async function rdfFetch (url, options = {}) {
 
   options = patchRequest(options, formats)
 
-  const res = await fetch(url, options)
+  const res = await _fetch(url, options)
 
-  return patchResponse(res, factory, fetch, formats.parsers)
+  return patchResponse(res, factory, _fetch, formats.parsers)
 }
 
 export {
-  rdfFetch as default,
-  Headers
+  rdfFetch as default
 }

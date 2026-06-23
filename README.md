@@ -1,18 +1,8 @@
-# @rdfjs/fetch-lite
-
-[![build status](https://img.shields.io/github/actions/workflow/status/rdfjs-base/fetch-lite/test.yaml?branch=master)](https://github.com/rdfjs-base/fetch-lite/actions/workflows/test.yaml)
-[![npm version](https://img.shields.io/npm/v/@rdfjs/fetch-lite.svg)](https://www.npmjs.com/package/@rdfjs/fetch-lite)
+# @zazuko/rdf-fetch
 
 Wrapper for fetch to simplify sending and retrieving RDF data.
 
-This is a light version of the `@rdfjs/fetch` package, without the `@rdfjs/formats-common` dependency.
-It is useful when you want to make a build for the browser with a reduced set of parsers and serializers.
-
-The `formats` options is required for this package.
-See also the `@rdfjs/fetch` documentation.
-
-Since version 3.0, this packages is [ESM](https://nodejs.org/api/esm.html) only.
-Check version 2.x if you are looking for a CommonJS package.
+> This is a fork of [`@rdfjs/fetch-lite`](https://github.com/rdfjs-base/fetch-lite) which uses native fetch instead of nodeify-fetch.
 
 ## Usage
 
@@ -59,9 +49,22 @@ This example fetches data from a resource on Wikidata.
 The stream API is used to process all quads.
 For all `rdfs:label` quads of the defined entity, the object language and value will be written to the console.
 
+### As part of `@zazuko/env-node`
+
+```javascript
+import $rdf from '@zazuko/env-node'
+
+const res = await $rdf.fetch('https://www.wikidata.org/wiki/Special:EntityData/Q2.ttl')
+const dataset = await res.dataset()
+
+const graph = $rdf.clownface({ dataset })
+```
+
+### Standalone
+
 ```javascript
 import formats from '@rdfjs/formats-common'
-import fetch from '@rdfjs/fetch-lite'
+import fetch from '@zazuko/rdf-fetch'
 
 const entity = 'http://www.wikidata.org/entity/Q2'
 const label = 'http://www.w3.org/2000/01/rdf-schema#label'

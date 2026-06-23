@@ -1,10 +1,10 @@
 import { deepStrictEqual, rejects, strictEqual } from 'assert'
+import { Readable } from 'node:stream'
 import rdfDataset from '@rdfjs/dataset'
 import formats from '@rdfjs/formats'
 import SinkMap from '@rdfjs/sink-map'
 import { isReadableStream } from 'is-stream'
 import { describe, it } from 'mocha'
-import { Readable } from 'readable-stream'
 import { chunks, decode } from 'stream-chunks'
 import rdfFetch from '../index.js'
 import example from './support/example.js'
@@ -194,24 +194,6 @@ describe('response', () => {
         })
       }, {
         message: /Content-Type/
-      })
-    })
-
-    it('should be able to explicitly handle missing Content-Type header', async () => {
-      await simpleServer(async ({ baseUrl }) => {
-        const res = await rdfFetch(baseUrl, { factory: rdfDataset, formats })
-
-        // If we know in advance that a server doesn't provide an HTTP Content-Type header
-        // then we can provide it explicitly ourselves...
-        res.headers.set('content-type', 'application/n-triples')
-
-        const dataset = await res.dataset()
-        strictEqual(typeof dataset.add, 'function')
-      }, {
-        '/': {
-          content: example.quadNt,
-          contentType: null
-        }
       })
     })
 

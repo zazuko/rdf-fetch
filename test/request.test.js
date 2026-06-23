@@ -1,10 +1,10 @@
 import { rejects, strictEqual } from 'assert'
+import { Readable } from 'node:stream'
 import dataModel from '@rdfjs/data-model'
 import formats from '@rdfjs/formats/pretty.js'
 import SinkMap from '@rdfjs/sink-map'
 import { describe, it } from 'mocha'
-import { Readable } from 'readable-stream'
-import rdfFetch, { Headers } from '../index.js'
+import rdfFetch from '../index.js'
 import example from './support/example.js'
 import simpleServer from './support/simpleServer.js'
 

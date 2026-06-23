@@ -8,9 +8,8 @@ import SinkMap from '@rdfjs/sink-map'
 import toNT from '@rdfjs/to-ntriples'
 import withServer from 'express-as-promise/withServer.js'
 import { describe, it } from 'mocha'
-import nodeFetch from 'nodeify-fetch'
+import nodeFetch from 'node-fetch'
 import FetchFactory from '../Factory.js'
-import { Headers } from '../index.js'
 import example from './support/example.js'
 
 describe('FetchFactory', () => {
@@ -198,20 +197,6 @@ describe('FetchFactory', () => {
       env.fetch.config('fetch', value)
 
       strictEqual(env._fetch.fetch, value)
-    })
-  })
-
-  describe('.fetch.Headers', () => {
-    it('should be a constructor', () => {
-      const env = new Environment([FetchFactory])
-
-      strictEqual(typeof env.fetch.Headers, 'function')
-    })
-
-    it('should be the Headers class from @rdfjs/fetch-lite', () => {
-      const env = new Environment([FetchFactory])
-
-      strictEqual(env.fetch.Headers, Headers)
     })
   })
 })

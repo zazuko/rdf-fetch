@@ -1,4 +1,4 @@
-import fetch, { Headers } from './index.js'
+import fetch from './index.js'
 
 function createFetch (context) {
   const result = function (url, options = {}) {
@@ -15,8 +15,6 @@ function createFetch (context) {
   result.config = function (key, value) {
     context._fetch[key] = value
   }
-
-  result.Headers = Headers
 
   return result
 }
