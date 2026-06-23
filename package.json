@@ -49,5 +49,8 @@
     "lib",
     "*.js",
     "*.d.ts"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
