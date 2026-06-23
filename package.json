@@ -44,5 +44,10 @@
     "stream-chunks": "^1.0.0",
     "stricter-standard": "^0.3.1",
     "test-runner-browser": "^0.1.0"
-  }
+  },
+  "files": [
+    "lib",
+    "*.js",
+    "*.d.ts"
+  ]
 }
